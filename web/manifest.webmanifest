@@ -1,0 +1,18 @@
+{
+  "name": "7Tech – אלפון הקהילה",
+  "short_name": "7Tech",
+  "description": "חיפוש, חיבור ועדכון פרטים בקהילת 7Tech",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "dir": "rtl",
+  "lang": "he",
+  "background_color": "#f7f7fb",
+  "theme_color": "#4338ca",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "name": "7tech-directory",
+  "private": true,
+  "description": "7Tech community directory PWA. The app itself has no build step; this file only pins test tooling.",
+  "type": "module",
+  "scripts": {
+    "test": "node scripts/check_i18n.mjs && node scripts/check_normalizers.mjs && scripts/test_db.sh && node scripts/smoke_test.cjs",
+    "serve": "python3 -m http.server 8000 --directory web"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}
