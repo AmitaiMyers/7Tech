@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="7Tech">
+  <!-- Vector redraw of the 7Tech logo mark (docs/brand/logo-original.jpg): submarine on black water. -->
+  <defs>
+    <linearGradient id="hull" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3d4250"/>
+      <stop offset="0.38" stop-color="#7d7556"/>
+      <stop offset="0.62" stop-color="#b3a26b"/>
+      <stop offset="1" stop-color="#6b6038"/>
+    </linearGradient>
+    <linearGradient id="sail" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#34449c"/>
+      <stop offset="1" stop-color="#161e52"/>
+    </linearGradient>
+  </defs>
+  <circle cx="256" cy="256" r="256" fill="#05070d"/>
+  <rect x="150" y="214" width="66" height="28" rx="10" fill="url(#sail)"/>
+  <path d="M74 236 H404 C426 236 444 246 462 256 C444 266 426 276 404 276 H74 C58 276 46 267 46 256 C46 245 58 236 74 236 Z" fill="url(#hull)"/>
+  <path d="M74 238 H404 C420 238 434 243 448 250" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2" fill="none"/>
+  <rect x="448" y="238" width="5" height="36" rx="2.5" fill="#8f8458"/>
+  <ellipse cx="472" cy="256" rx="3.5" ry="13" fill="#b3a26b"/>
+  <rect x="460" y="254.5" width="12" height="3" fill="#8f8458"/>
+</svg>

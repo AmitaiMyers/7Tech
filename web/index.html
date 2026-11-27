@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>7Tech</title>
+  <meta name="description" content="אלפון קהילת 7Tech: חיפוש, חיבור ועדכון פרטים">
+  <!-- Member directory behind a login: keep it out of search engines. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f5f6fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#05070d" media="(prefers-color-scheme: dark)">
+  <meta name="color-scheme" content="light dark">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/logo-mark.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="7Tech">
+  <link rel="preload" href="fonts/heebo-hebrew-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/app.css">
+  <!-- Apply the saved theme before first paint (same rule as js/theme.js) so there is no flash. -->
+  <script>
+    (function () {
+      var theme = localStorage.getItem('theme');
+      if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+    })();
+  </script>
+  <script src="vendor/supabase-2.117.3.js"></script>
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <div id="app"></div>
+  <noscript>האפליקציה דורשת JavaScript. / This app needs JavaScript.</noscript>
+</body>
+</html>

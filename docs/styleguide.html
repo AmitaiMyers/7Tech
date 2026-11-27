@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>7Tech Style Guide</title>
+  <meta name="robots" content="noindex">
+  <link rel="stylesheet" href="../web/css/tokens.css">
+  <link rel="stylesheet" href="../web/css/components.css">
+  <style>
+    /* Style-guide page chrome only; everything inside the demos comes from tokens.css + components.css. */
+    .sg { max-width: 760px; margin: 0 auto; padding: var(--space-4) var(--space-4) var(--space-8); display: flex; flex-direction: column; gap: var(--space-7); }
+    .sg-top { position: sticky; top: 0; z-index: var(--z-nav); display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: color-mix(in srgb, var(--color-bg) 88%, transparent); backdrop-filter: blur(12px); border-block-end: 1px solid var(--color-border); }
+    .sg-top img { width: 36px; height: 36px; }
+    .sg-top .wordmark { font-size: var(--text-lg); }
+    .sg-top .row { margin-inline-start: auto; flex-wrap: nowrap; gap: var(--space-1); }
+    .sg-top .chip { min-height: 32px; padding: 0 var(--space-2); }
+    .sg-top .chip[aria-pressed="true"]::before { content: none; }
+    .sg-section { display: flex; flex-direction: column; gap: var(--space-4); }
+    .sg-section > header { display: flex; flex-direction: column; gap: var(--space-1); }
+    .sg-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: var(--space-3); }
+    .swatch { border-radius: var(--radius-md); overflow: hidden; border: 1px solid var(--color-border); background: var(--color-surface); }
+    .swatch__chip { height: 64px; display: flex; align-items: end; justify-content: end; padding: var(--space-1) var(--space-2); font-size: var(--text-xs); font-weight: 700; }
+    .swatch__label { padding: var(--space-2); font-size: var(--text-xs); line-height: 1.4; }
+    .swatch__label code { direction: ltr; unicode-bidi: isolate; }
+    .type-row { display: flex; align-items: baseline; gap: var(--space-3); padding-block: var(--space-2); border-block-end: 1px solid var(--color-border); }
+    .type-row code { flex: none; width: 7.5rem; font-size: var(--text-xs); color: var(--color-text-muted); direction: ltr; text-align: start; }
+    .space-bar { height: 12px; border-radius: 3px; background: var(--color-sail); }
+    .motion-track { position: relative; height: 40px; border-radius: var(--radius-pill); background: var(--color-surface-2); }
+    .motion-dot { position: absolute; inset-block-start: 6px; inset-inline-start: 6px; width: 28px; height: 28px; border-radius: 50%; background: var(--color-sail); }
+    .motion-track[data-go="true"] .motion-dot { inset-inline-start: calc(100% - 34px); }
+    .phone { max-width: 390px; border: 1px solid var(--color-border); border-radius: 28px; overflow: hidden; background: var(--color-bg); box-shadow: var(--shadow-2); }
+    .phone__body { padding: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); }
+    .demo-label { font-size: var(--text-xs); color: var(--color-text-muted); }
+    .logo-pair { display: flex; gap: var(--space-5); align-items: center; flex-wrap: wrap; }
+    .logo-pair figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
+    .lockup { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); padding: var(--space-5); border-radius: var(--radius-xl); background: var(--color-abyss); color: #f5f6fa; }
+    .lockup img { width: 140px; }
+    .lockup .wordmark { font-size: var(--text-3xl); }
+  </style>
+</head>
+<body>
+  <div class="sg-top">
+    <img src="../web/icons/logo-mark.svg" alt="">
+    <span class="wordmark">7Tech</span>
+    <div class="row" role="group" aria-label="Theme and language">
+      <button class="chip" data-theme-choice="system" aria-pressed="true" aria-label="ערכת נושא לפי המכשיר">A</button>
+      <button class="chip" data-theme-choice="light" aria-pressed="false" aria-label="בהיר">☀︎</button>
+      <button class="chip" data-theme-choice="dark" aria-pressed="false" aria-label="כהה">☾</button>
+      <button class="chip" id="dir-toggle" aria-pressed="false">EN</button>
+    </div>
+  </div>
+
+  <main class="sg">
+    <section class="sg-section">
+      <header>
+        <span class="overline">Design system · Phase 1</span>
+        <h1>Deep Water</h1>
+        <p class="muted">שפת העיצוב של אלפון 7Tech: שקטה כמו מים עמוקים, מגיבה למגע. צבע אינטראקטיבי אחד (הצריח), מבטא זהות אחד (הגוף), והרבה שקט.</p>
+      </header>
+      <div class="logo-pair">
+        <figure><img src="brand/logo-original.jpg" width="120" height="120" alt="Original 7Tech logo" style="border-radius:50%"><figcaption class="demo-label">מקור</figcaption></figure>
+        <figure><img src="../web/icons/logo-mark.svg" width="120" height="120" alt="Vector 7Tech mark"><figcaption class="demo-label">וקטור לאייקונים</figcaption></figure>
+        <div class="lockup"><img src="../web/icons/logo-mark.svg" alt=""><span class="wordmark">7Tech</span></div>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <header><span class="overline">01 · Color</span><h2>פלטה</h2>
+        <p class="muted small">כל צבע מוגדר פעם אחת לבהיר ולכהה. המספר על כל דוגמה הוא יחס הניגודיות מול הרקע הנוכחי, מחושב בזמן אמת.</p></header>
+      <div class="sg-grid" id="swatches"></div>
+    </section>
+
+    <section class="sg-section">
+      <header><span class="overline">02 · Typography</span><h2>טיפוגרפיה · Heebo</h2></header>
+      <div>
+        <div class="type-row"><code>3xl · 34 / 700</code><span style="font-size:var(--text-3xl);font-weight:700">דנה לוי</span></div>
+        <div class="type-row"><code>2xl · 28 / 700</code><span style="font-size:var(--text-2xl);font-weight:700">אנשים</span></div>
+        <div class="type-row"><code>xl · 23 / 600</code><span style="font-size:var(--text-xl);font-weight:600">שמח/ה לעזור ב:</span></div>
+        <div class="type-row"><code>lg · 19 / 600</code><span style="font-size:var(--text-lg);font-weight:600">Yossi Cohen</span></div>
+        <div class="type-row"><code>md · 16 / 400</code><span><bdi>Senior Backend Engineer</bdi> ב-<bdi>Nimbus Labs</bdi></span></div>
+        <div class="type-row"><code>sm · 14 / 500</code><span class="small" style="font-weight:500">פיתוח Backend · סניור · רמת גן</span></div>
+        <div class="type-row"><code>xs · overline</code><span class="overline">Course 115 · מחזור</span></div>
+        <div class="type-row"><code>wordmark · 300</code><span class="wordmark" style="font-size:var(--text-2xl)">7Tech</span></div>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <header><span class="overline">03 · Space, shape, elevation</span><h2>מרווחים, צורה ועומק</h2></header>
+      <div class="stack" id="spacing"></div>
+      <div class="sg-grid">
+        <div class="card" style="border-radius:var(--radius-sm)"><span class="demo-label">sm · 8 · inputs</span></div>
+        <div class="card" style="border-radius:var(--radius-md)"><span class="demo-label">md · 12 · rows</span></div>
+        <div class="card"><span class="demo-label">lg · 16 · cards</span></div>
+        <div class="card" style="border-radius:var(--radius-xl)"><span class="demo-label">xl · 24 · sheets</span></div>
+      </div>
+      <div class="sg-grid">
+        <div class="card" style="box-shadow:var(--shadow-1)"><span class="demo-label">elevation 1 · resting</span></div>
+        <div class="card" style="box-shadow:var(--shadow-2)"><span class="demo-label">elevation 2 · raised</span></div>
+        <div class="card" style="box-shadow:var(--shadow-3)"><span class="demo-label">elevation 3 · sheet</span></div>
+      </div>
+    </section>
+
+    <section class="sg-section">
+      <header><span class="overline">04 · Motion</span><h2>תנועה</h2><p class="muted small">לחצו על פס כדי לראות כל עקומה. עם "הפחתת תנועה" במכשיר, הכול מיידי.</p></header>
+      <div class="stack" id="motion"></div>
+    </section>
+
+    <section class="sg-section">
+      <header><span class="overline">05 · Components & states</span><h2>רכיבים ומצבים</h2></header>
+
+      <div class="card stack">
+        <h3>כפתורים</h3>
+        <div class="row">
+          <button class="btn" id="save-demo"><span class="btn__icon"><span>💾</span></span>שמירה</button>
+          <button class="btn btn--soft">משני</button>
+          <button class="btn btn--ghost">שקט</button>
+          <button class="btn btn--whatsapp"><span class="btn__icon"><span>💬</span></span>וואטסאפ</button>
+          <button class="btn btn--danger">מחיקה</button>
+          <button class="btn" disabled>מושבת</button>
+        </div>
+        <p class="demo-label">"שמירה": לחיצה → טעינה (הרוחב לא קופץ) → ✓ הצלחה → חזרה למצב רגיל.</p>
+      </div>
+
+      <div class="card stack">
+        <h3>צ׳יפים לסינון</h3>
+        <div class="chip-row">
+          <button class="chip chip--brass" aria-pressed="false">⚓ המחזור שלי (115)</button>
+          <button class="chip" aria-pressed="true">מחפשים עבודה</button>
+          <button class="chip" aria-pressed="false">נותנים הפניות</button>
+          <button class="chip" aria-pressed="false">עזרה בקו״ח</button>
+          <button class="chip chip--clear" aria-pressed="false">נקה סינון ✕</button>
+        </div>
+        <div class="row"><span class="tag tag--course">⚓ מחזור 115</span><span class="tag tag--offer">הפניות</span><span class="tag tag--looking">מחפש/ת עבודה</span><span class="tag tag--stale">ייתכן שאינו עדכני</span><span class="tag">Python</span></div>
+      </div>
+
+      <div class="card stack">
+        <h3>שדות</h3>
+        <input class="input input--search" type="search" placeholder="חיפוש: שם, חברה, תפקיד, מחזור…" aria-label="חיפוש">
+        <form class="stack" id="field-demo" novalidate>
+          <label class="field" id="phone-field">
+            <span class="field__label">טלפון (לוואטסאפ)</span>
+            <input class="input" type="tel" inputmode="tel" placeholder="050-1234567" aria-describedby="phone-error">
+            <span class="field__error" id="phone-error">מספר לא תקין. למשל 050-1234567</span>
+          </label>
+          <label class="field">
+            <span class="field__label">אימייל</span>
+            <input class="input" type="email" value="dana@example.com" disabled>
+            <span class="field__hint">משמש לכניסה. ניתן לשינוי ע״י מנהל/ת.</span>
+          </label>
+          <label class="switch"><span><strong>אני מחפש/ת עבודה</strong><br><span class="muted small">יופיע תג ותופיעו בסינון</span></span><input type="checkbox" role="switch"></label>
+          <button class="btn btn--block" type="submit">בדיקת שדה</button>
+        </form>
+        <div class="stack">
+          <span class="field__label">קוד כניסה</span>
+          <div class="otp" id="otp" role="group" aria-label="קוד בן 6 ספרות"></div>
+          <p class="demo-label">מתקדם אוטומטית, תומך בהדבקה, נשלח לבד בספרה השישית.</p>
+        </div>
+      </div>
+
+      <div class="card stack">
+        <h3>כרטיסי אנשים</h3>
+        <article class="card person-card">
+          <a class="person-card__main" href="#connect" data-open-sheet>
+          <div class="avatar" style="--hue:260">יכ</div>
+          <div class="person-card__body">
+            <span class="person-card__name">יוסי כהן</span>
+            <span class="muted"><bdi>Senior <mark>Backend</mark> Engineer</bdi> ב-<bdi>Nimbus Labs</bdi></span>
+            <div class="row"><span class="tag tag--course">⚓ 115</span><span class="tag tag--offer">הפניות</span><span class="tag tag--offer">שאלות</span></div>
+            <span class="person-card__meta">עודכן לפני 20 ימים</span>
+          </div>
+          </a>
+          <button class="icon-btn" type="button" aria-label="וואטסאפ ליוסי" data-open-sheet>💬</button>
+        </article>
+        <article class="card person-card">
+          <a class="person-card__main" href="#connect">
+          <div class="avatar" style="--hue:140">RA</div>
+          <div class="person-card__body">
+            <span class="person-card__name">Ron Almog</span>
+            <span class="muted"><bdi>Full Stack Developer</bdi> ב-<bdi>Cyberion</bdi></span>
+            <span class="person-card__meta">מהרשימה הישנה, טרם אושר</span>
+          </div>
+          </a>
+        </article>
+        <div class="card person-card" aria-hidden="true">
+          <div class="avatar skeleton"></div>
+          <div class="person-card__body"><div class="skeleton" style="height:18px;width:40%"></div><div class="skeleton" style="height:14px;width:70%;margin-top:6px"></div><div class="skeleton" style="height:14px;width:55%;margin-top:6px"></div></div>
+        </div>
+        <p class="demo-label">לחיצה על הכרטיס הראשון פותחת את גיליון יצירת הקשר. הכרטיס השלישי הוא שלד טעינה.</p>
+      </div>
+
+      <div class="card stack">
+        <h3>מצב ריק · סונאר</h3>
+        <div class="empty">
+          <div class="sonar"><img src="../web/icons/logo-mark.svg" alt=""></div>
+          <p><strong>לא מצאנו אף אחד</strong></p>
+          <p class="muted small">נסו מילה אחרת, או נקו את הסינון.</p>
+          <button class="btn btn--soft" id="toast-demo">נקה סינון</button>
+        </div>
+      </div>
+
+      <div class="phone">
+        <div class="phone__body">
+          <span class="demo-label">סרגל ניווט · האינדיקטור מחליק בין לשוניות</span>
+        </div>
+        <nav class="tabbar" id="tabbar" aria-label="ניווט ראשי">
+          <span class="tabbar__indicator" aria-hidden="true"></span>
+          <button class="tabbar__tab" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M21.5 20a6.5 6.5 0 0 0-4-6"/></svg>אנשים</button>
+          <button class="tabbar__tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M10 21v-4h4v4"/></svg>חברות</button>
+          <button class="tabbar__tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/></svg>משרות</button>
+          <button class="tabbar__tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>אני</button>
+        </nav>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="sheet" id="connect" aria-labelledby="connect-title">
+    <div class="sheet__grabber" aria-hidden="true"></div>
+    <div class="stack">
+      <div class="row"><div class="avatar" style="--hue:260">יכ</div><div><h3 id="connect-title">יצירת קשר עם יוסי</h3><span class="muted small">מעדיף: וואטסאפ</span></div></div>
+      <div class="stack" id="ask-list"></div>
+      <div id="preview-slot"></div>
+      <a class="btn btn--send btn--block" id="open-wa" href="#" aria-disabled="true">פתיחת וואטסאפ ←</a>
+      <button class="btn btn--ghost btn--block" id="close-sheet">סגירה</button>
+    </div>
+  </dialog>
+
+  <script type="module">
+    const root = document.documentElement;
+
+    // Theme: System / Light / Dark via data-theme (tokens.css switches color-scheme).
+    for (const button of document.querySelectorAll('[data-theme-choice]')) {
+      button.addEventListener('click', () => {
+        const choice = button.dataset.themeChoice;
+        if (choice === 'system') delete root.dataset.theme; else root.dataset.theme = choice;
+        for (const other of document.querySelectorAll('[data-theme-choice]')) other.setAttribute('aria-pressed', String(other === button));
+        renderSwatches();
+      });
+    }
+    document.getElementById('dir-toggle').addEventListener('click', (event) => {
+      const ltr = root.dir === 'rtl';
+      root.dir = ltr ? 'ltr' : 'rtl';
+      root.lang = ltr ? 'en' : 'he';
+      event.currentTarget.setAttribute('aria-pressed', String(ltr));
+      event.currentTarget.textContent = ltr ? 'עב' : 'EN';
+      placeIndicator();
+    });
+
+    // Live swatches with contrast against the current background.
+    const SWATCHES = ['bg', 'surface', 'surface-2', 'border', 'text', 'text-muted', 'sail', 'sail-soft', 'brass', 'brass-soft', 'success', 'success-soft', 'warning', 'warning-soft', 'danger', 'danger-soft'];
+    function rgbOf(name) {
+      const probe = document.createElement('span');
+      probe.style.color = `var(--color-${name})`;
+      document.body.append(probe);
+      const rgb = getComputedStyle(probe).color.match(/\d+(\.\d+)?/g).slice(0, 3).map(Number);
+      probe.remove();
+      return rgb;
+    }
+    function luminance([r, g, b]) {
+      const f = (c) => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+      return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+    }
+    function hex(rgb) { return '#' + rgb.map((c) => c.toString(16).padStart(2, '0')).join(''); }
+    function renderSwatches() {
+      const bg = luminance(rgbOf('surface'));
+      const container = document.getElementById('swatches');
+      container.replaceChildren(...SWATCHES.map((name) => {
+        const rgb = rgbOf(name);
+        const [hi, lo] = [luminance(rgb), bg].sort((a, b) => b - a);
+        const ratio = ((hi + 0.05) / (lo + 0.05)).toFixed(1);
+        const el = document.createElement('div');
+        el.className = 'swatch';
+        el.innerHTML = `<div class="swatch__chip" style="background:var(--color-${name});color:${luminance(rgb) > 0.35 ? '#0b1020' : '#fff'}">${ratio}:1</div>
+          <div class="swatch__label"><strong>${name}</strong><br><code>${hex(rgb)}</code></div>`;
+        return el;
+      }));
+    }
+
+    // Spacing and motion demos.
+    document.getElementById('spacing').replaceChildren(...[1, 2, 3, 4, 5, 6, 7, 8].map((step) => {
+      const row = document.createElement('div');
+      row.className = 'row';
+      row.innerHTML = `<code class="demo-label" style="width:5rem;direction:ltr">space-${step}</code><div class="space-bar" style="width:var(--space-${step})"></div>`;
+      return row;
+    }));
+    const MOTION = [['standard', 'base'], ['enter', 'slow'], ['exit', 'base'], ['pop', 'slow']];
+    document.getElementById('motion').replaceChildren(...MOTION.map(([ease, duration]) => {
+      const wrap = document.createElement('div');
+      wrap.className = 'stack';
+      wrap.style.gap = 'var(--space-1)';
+      wrap.innerHTML = `<span class="demo-label" style="direction:ltr;text-align:start">--ease-${ease} · --duration-${duration}</span>
+        <button class="motion-track" style="border:0;cursor:pointer" aria-label="Play ${ease}"><span class="motion-dot" style="transition:inset-inline-start var(--duration-${duration}) var(--ease-${ease})"></span></button>`;
+      wrap.querySelector('button').addEventListener('click', (event) => {
+        const track = event.currentTarget;
+        track.dataset.go = String(track.dataset.go !== 'true');
+      });
+      return wrap;
+    }));
+
+    // Toast: one at a time, slides up, auto-dismisses.
+    function toast(message, actionLabel) {
+      for (const old of document.querySelectorAll('.toast')) old.remove();
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.setAttribute('role', 'status');
+      el.textContent = message;
+      if (actionLabel) {
+        const action = document.createElement('button');
+        action.className = 'toast__action';
+        action.textContent = actionLabel;
+        action.addEventListener('click', () => el.remove());
+        el.append(action);
+      }
+      document.body.append(el);
+      setTimeout(() => { el.dataset.leaving = 'true'; el.addEventListener('animationend', () => el.remove()); }, 3500);
+    }
+    document.getElementById('toast-demo').addEventListener('click', () => toast('הסינון נוקה · 14 אנשים', 'ביטול'));
+
+    // Button: loading → success → rest.
+    document.getElementById('save-demo').addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      button.style.width = `${button.offsetWidth}px`;
+      button.setAttribute('aria-busy', 'true');
+      setTimeout(() => {
+        button.removeAttribute('aria-busy');
+        button.dataset.state = 'success';
+        toast('הפרופיל נשמר');
+        setTimeout(() => { delete button.dataset.state; button.style.width = ''; }, 1200);
+      }, 900);
+    });
+
+    // Chips toggle.
+    for (const chip of document.querySelectorAll('.chip-row .chip:not(.chip--clear)')) {
+      chip.addEventListener('click', () => {
+        chip.setAttribute('aria-pressed', String(chip.getAttribute('aria-pressed') !== 'true'));
+        navigator.vibrate?.(10);
+      });
+    }
+
+    // Field validation: inline error + shake + focus.
+    document.getElementById('field-demo').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const field = document.getElementById('phone-field');
+      const input = field.querySelector('input');
+      const valid = /^0\d{8,9}$/.test(input.value.replace(/\D/g, ''));
+      field.dataset.invalid = String(!valid);
+      input.setAttribute('aria-invalid', String(!valid));
+      if (!valid) {
+        event.currentTarget.classList.remove('shake');
+        void event.currentTarget.offsetWidth;
+        event.currentTarget.classList.add('shake');
+        input.focus();
+      } else {
+        toast('נשמר ✓');
+      }
+    });
+
+    // OTP: six boxes, auto-advance, paste support, auto-submit.
+    const otp = document.getElementById('otp');
+    const boxes = Array.from({ length: 6 }, (_, i) => {
+      const box = document.createElement('input');
+      box.className = 'otp__box';
+      box.inputMode = 'numeric';
+      box.autocomplete = i === 0 ? 'one-time-code' : 'off';
+      box.maxLength = 1;
+      box.setAttribute('aria-label', `ספרה ${i + 1}`);
+      return box;
+    });
+    otp.append(...boxes);
+    function fillFrom(index, digits) {
+      digits.split('').slice(0, 6 - index).forEach((digit, offset) => { boxes[index + offset].value = digit; });
+      boxes.forEach((box) => { box.dataset.filled = String(box.value !== ''); });
+      const next = boxes.find((box) => box.value === '');
+      if (next) next.focus(); else { boxes[5].blur(); toast('מתחברים…'); }
+    }
+    boxes.forEach((box, index) => {
+      box.addEventListener('input', () => {
+        const digits = box.value.replace(/\D/g, '');
+        box.value = '';
+        fillFrom(index, digits);
+      });
+      box.addEventListener('keydown', (event) => {
+        if (event.key === 'Backspace' && box.value === '' && index > 0) {
+          boxes[index - 1].value = '';
+          boxes[index - 1].dataset.filled = 'false';
+          boxes[index - 1].focus();
+        }
+      });
+      box.addEventListener('paste', (event) => {
+        event.preventDefault();
+        fillFrom(index, event.clipboardData.getData('text').replace(/\D/g, ''));
+      });
+    });
+
+    // Connect sheet: choose what to ask → preview the exact message → open WhatsApp.
+    const ASKS = [
+      ['👋', 'להגיד שלום', 'היי יוסי, כאן דנה מקבוצת 7Tech 👋'],
+      ['❓', 'לשאול שאלה', 'היי יוסי, כאן דנה מקבוצת 7Tech. ראיתי את הפרופיל שלך ורציתי לשאול שאלה קצרה: '],
+      ['🤝', 'לבקש הפניה', 'היי יוסי, כאן דנה מקבוצת 7Tech. אני מחפשת משרה ב-Nimbus Labs, ואשמח מאוד להפניה. אשלח קורות חיים, תודה!'],
+    ];
+    const sheet = document.getElementById('connect');
+    const openWa = document.getElementById('open-wa');
+    document.getElementById('ask-list').replaceChildren(...ASKS.map(([icon, label, text]) => {
+      const button = document.createElement('button');
+      button.className = 'btn btn--whatsapp btn--list btn--block';
+      button.setAttribute('aria-pressed', 'false');
+      button.innerHTML = `<span class="btn__icon"><span>${icon}</span></span>${label}`;
+      button.addEventListener('click', () => {
+        for (const other of document.querySelectorAll('#ask-list .btn')) other.setAttribute('aria-pressed', String(other === button));
+        const bubble = document.createElement('div');
+        bubble.className = 'preview-bubble';
+        bubble.textContent = text;
+        document.getElementById('preview-slot').replaceChildren(bubble);
+        openWa.href = `https://wa.me/972500000002?text=${encodeURIComponent(text)}`;
+        openWa.setAttribute('aria-disabled', 'false');
+        openWa.target = '_blank';
+      });
+      return button;
+    }));
+    for (const trigger of document.querySelectorAll('[data-open-sheet]')) {
+      trigger.addEventListener('click', (event) => { event.preventDefault(); event.stopPropagation(); sheet.showModal(); });
+    }
+    document.getElementById('close-sheet').addEventListener('click', () => sheet.close());
+    sheet.addEventListener('click', (event) => { if (event.target === sheet) sheet.close(); });
+
+    // Tab bar: sliding indicator under the active tab.
+    const tabbar = document.getElementById('tabbar');
+    const indicator = tabbar.querySelector('.tabbar__indicator');
+    function placeIndicator() {
+      const active = tabbar.querySelector('[aria-current="page"]');
+      const barBox = tabbar.getBoundingClientRect();
+      const tabBox = active.getBoundingClientRect();
+      const width = Math.min(64, tabBox.width - 16);
+      const fromStart = root.dir === 'rtl' ? barBox.right - tabBox.right : tabBox.left - barBox.left;
+      indicator.style.width = `${width}px`;
+      indicator.style.insetInlineStart = `${fromStart + (tabBox.width - width) / 2}px`;
+    }
+    for (const tab of tabbar.querySelectorAll('.tabbar__tab')) {
+      tab.addEventListener('click', () => {
+        for (const other of tabbar.querySelectorAll('.tabbar__tab')) other.removeAttribute('aria-current');
+        tab.setAttribute('aria-current', 'page');
+        placeIndicator();
+      });
+    }
+
+    renderSwatches();
+    document.fonts.ready.then(placeIndicator);
+  </script>
+</body>
+</html>
