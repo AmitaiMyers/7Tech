@@ -22,3 +22,6 @@ export const SEEKING_MAX = 500;
 export const STALE_AFTER_DAYS = 365;
 
 export const JOB_DEFAULT_DAYS = 30;
+
+// Supabase → Authentication → Email: "Email OTP Length" must match (6 is Supabase's default).
+export const OTP_LENGTH = 6;

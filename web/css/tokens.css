@@ -1,0 +1,138 @@
+/* 7Tech design tokens: the single source of truth for color, type, space, shape, elevation and motion.
+ * Spec and rationale: docs/design-system.md. Contrast is verified by scripts/check_contrast.mjs.
+ *
+ * Every color is declared ONCE with light-dark(<light>, <dark>). The active theme comes from `color-scheme`:
+ * it follows the device by default, and <html data-theme="light|dark"> forces one. */
+
+@font-face {
+  font-family: "Heebo";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/heebo-hebrew-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0307-0308, U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F;
+}
+
+@font-face {
+  font-family: "Heebo";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/heebo-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* ── Color: brand ──
+   * Abyss  = the logo's black water.   Sail = the logo's navy sail → the interactive color.
+   * Brass  = the logo's olive hull   → identity accents (course badges, "my course", highlights). */
+  --color-abyss: #05070d;
+  /* Always-dark brand surfaces (login band, splash), whatever the theme. */
+  --color-abyss-glow: #121a3a;
+  --color-on-abyss: #eceef6;
+  --color-on-abyss-muted: #b4bad0;
+  --color-sail-on-abyss: #8e9cff;
+  --color-sail: light-dark(#2f3f96, #8e9cff);
+  --color-sail-strong: light-dark(#24317a, #b0baff);
+  --color-sail-soft: light-dark(#e6e9fa, #1c2350);
+  --color-on-sail: light-dark(#ffffff, #0a0e1a);
+  --color-brass: light-dark(#97844f, #c9b67e);
+  --color-brass-text: light-dark(#6b5c2b, #d6c691);
+  --color-brass-soft: light-dark(#f4efdf, #2a2617);
+
+  /* ── Color: neutrals ── */
+  --color-bg: light-dark(#f5f6fa, #05070d);
+  --color-surface: light-dark(#ffffff, #0e1322);
+  --color-surface-2: light-dark(#edeff5, #161c2f);
+  --color-border: light-dark(#d5dae6, #2a3250);
+  --color-text: light-dark(#0b1020, #eceef6);
+  --color-text-muted: light-dark(#535a70, #9aa1b8);
+  --color-scrim: light-dark(rgb(11 16 32 / 40%), rgb(0 0 0 / 60%));
+
+  /* ── Color: feedback ── (success doubles as WhatsApp green) */
+  --color-success: light-dark(#0f7a40, #3ddc84);
+  --color-success-soft: light-dark(#ddf3e6, #10291c);
+  --color-warning: light-dark(#8a5a00, #f5c86b);
+  --color-warning-soft: light-dark(#fff4d6, #2e2410);
+  --color-danger: light-dark(#b42318, #ff8a80);
+  --color-danger-soft: light-dark(#fde8e6, #33130f);
+
+  /* ── Typography ── Heebo: geometric, Hebrew + Latin, echoes the logo's light wide wordmark. */
+  --font-sans: "Heebo", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --text-xs: 0.75rem;     /* 12  meta, timestamps */
+  --text-sm: 0.875rem;    /* 14  secondary lines, chips */
+  --text-md: 1rem;        /* 16  body, inputs (never smaller: iOS zooms) */
+  --text-lg: 1.1875rem;   /* 19  card titles */
+  --text-xl: 1.4375rem;   /* 23  section titles */
+  --text-2xl: 1.75rem;    /* 28  page titles */
+  --text-3xl: 2.125rem;   /* 34  profile name, login hero */
+  --leading-tight: 1.2;
+  --leading-body: 1.5;
+  --weight-light: 300;    /* wordmark & display only */
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-bold: 700;
+  --tracking-wordmark: 0.22em; /* uppercase overlines, like "7 T E C H" */
+
+  /* ── Space ── 4 px grid. */
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 0.75rem;  /* 12 */
+  --space-4: 1rem;     /* 16  page gutter */
+  --space-5: 1.5rem;   /* 24 */
+  --space-6: 2rem;     /* 32 */
+  --space-7: 3rem;     /* 48 */
+  --space-8: 4rem;     /* 64 */
+
+  /* ── Shape ── */
+  --radius-sm: 8px;    /* inputs, small chips */
+  --radius-md: 12px;   /* buttons in lists, message rows */
+  --radius-lg: 16px;   /* cards */
+  --radius-xl: 24px;   /* sheets, dialogs */
+  --radius-pill: 999px;
+  --tap-min: 44px;     /* minimum touch target */
+
+  /* ── Elevation ── shadows in light; a lit hairline in dark (shadows vanish on black). */
+  --shadow-1: 0 1px 2px light-dark(rgb(11 16 32 / 6%), rgb(0 0 0 / 0%)),
+              0 0 0 1px light-dark(rgb(11 16 32 / 0%), rgb(255 255 255 / 3%));
+  --shadow-2: 0 4px 14px light-dark(rgb(11 16 32 / 10%), rgb(0 0 0 / 50%)),
+              0 0 0 1px light-dark(rgb(11 16 32 / 0%), rgb(255 255 255 / 6%));
+  --shadow-3: 0 16px 40px light-dark(rgb(11 16 32 / 18%), rgb(0 0 0 / 70%));
+  --ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-sail);
+
+  /* ── Motion ── short, physical, never decorative-only. */
+  --duration-instant: 80ms;   /* color/opacity of small things */
+  --duration-fast: 140ms;     /* press, toggle */
+  --duration-base: 220ms;     /* enter/leave, sheets start */
+  --duration-slow: 360ms;     /* page transitions, sheet travel */
+  --ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --ease-enter: cubic-bezier(0, 0, 0, 1);
+  --ease-exit: cubic-bezier(0.3, 0, 1, 1);
+  --ease-pop: cubic-bezier(0.34, 1.56, 0.64, 1); /* slight overshoot: success ticks, toggled chips */
+  --press-scale: 0.97;
+
+  /* ── Layout ── */
+  --content-max: 680px;
+  --header-height: 56px;
+  --tabbar-height: 64px;
+  --z-sticky: 10;
+  --z-nav: 20;
+  --z-sheet: 40;
+  --z-toast: 50;
+}
+
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-instant: 0.01ms;
+    --duration-fast: 0.01ms;
+    --duration-base: 0.01ms;
+    --duration-slow: 0.01ms;
+    --press-scale: 1;
+  }
+}

@@ -30,21 +30,61 @@ export function mount(container, ...children) {
   appendChildren(container, children);
 }
 
-export function toast(message) {
+const TOAST_MS = 3500;
+const SUCCESS_MS = 1200;
+
+// One toast at a time; slides up, leaves after 3.5 s or when tapped. `action` = { label, run }.
+export function toast(message, action = null) {
   for (const previous of document.querySelectorAll('.toast')) previous.remove();
-  const el = h('div', { class: 'toast', role: 'status' }, message);
+  const el = h('div', { class: 'toast', role: 'status' },
+    h('span', {}, message),
+    action && h('button', { class: 'toast__action', onclick: () => { dismiss(); action.run(); } }, action.label));
+  function dismiss() {
+    if (!el.isConnected || el.dataset.leaving === 'true') return;
+    el.dataset.leaving = 'true';
+    el.addEventListener('animationend', () => el.remove(), { once: true });
+    setTimeout(() => el.remove(), 400); // reduced motion: no animationend
+  }
+  el.addEventListener('click', (event) => { if (event.target === el) dismiss(); });
   document.body.append(el);
-  setTimeout(() => el.remove(), 4000);
+  setTimeout(dismiss, TOAST_MS);
 }
 
-// Disables the button while an async action runs, so double taps don't submit twice.
+// A short tick on phones that support it (Android); silently nothing elsewhere.
+export function haptic() {
+  if ('vibrate' in navigator) navigator.vibrate(10);
+}
+
+// Runs an async action on a button: loading state (width locked, spinner), then a brief ✓.
+// Double taps are ignored while busy. Errors propagate after the button is restored.
 export async function withBusy(button, action) {
+  if (button.getAttribute('aria-busy') === 'true') return;
+  button.style.width = `${button.offsetWidth}px`;
+  button.setAttribute('aria-busy', 'true');
   button.disabled = true;
+  let succeeded = false;
   try {
     await action();
+    succeeded = true;
   } finally {
+    button.removeAttribute('aria-busy');
     button.disabled = false;
+    if (succeeded && button.isConnected) {
+      button.dataset.state = 'success';
+      haptic();
+      setTimeout(() => { delete button.dataset.state; button.style.width = ''; }, SUCCESS_MS);
+    } else {
+      button.style.width = '';
+    }
   }
+}
+
+// Wraps occurrences of the search tokens in <mark> (case-insensitive). Returns nodes for h().
+export function highlight(text, tokens) {
+  if (tokens.length === 0) return [text];
+  const escaped = tokens.map((token) => token.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  const pattern = new RegExp(`(${escaped.join('|')})`, 'gi');
+  return text.split(pattern).map((part, index) => (index % 2 === 1 ? h('mark', {}, part) : part));
 }
 
 export function initials(fullName) {
@@ -57,7 +97,7 @@ export function initials(fullName) {
 export function avatar(fullName, size = 'md') {
   let hash = 0;
   for (const char of fullName) hash = (hash * 31 + char.codePointAt(0)) % 360;
-  return h('div', { class: `avatar avatar-${size}`, style: `--hue:${hash}`, 'aria-hidden': 'true' }, initials(fullName));
+  return h('div', { class: size === 'lg' ? 'avatar avatar--lg' : 'avatar', style: `--hue:${hash}`, 'aria-hidden': 'true' }, initials(fullName));
 }
 
 export function downloadFile(filename, mimeType, content) {

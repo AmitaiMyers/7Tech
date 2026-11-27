@@ -6,6 +6,7 @@ import { join } from 'node:path';
 globalThis.localStorage = { getItem: () => null, setItem: () => {} };
 const { STRINGS_FOR_TESTS: strings, LANGUAGES } = await import('../web/js/i18n.js');
 const { CONTACT_METHODS, FIELDS, OFFERS, SENIORITIES } = await import('../web/js/constants.js');
+const { THEMES } = await import('../web/js/theme.js');
 
 const problems = [];
 const [first, ...others] = LANGUAGES;
@@ -25,6 +26,7 @@ const dynamicKeys = [
   ...MESSAGE_KINDS.map((kind) => `wa.${kind}`),
   ...['approved', 'pending', 'removed'].map((status) => `admin.status_${status}`),
   ...LANGUAGES.map((lang) => `settings.switch_to_${lang}`),
+  ...THEMES.map((theme) => `settings.theme_${theme}`),
 ];
 
 function sourceFiles(dir) {

@@ -15,7 +15,9 @@ The 7Tech community directory: a free, installable web app (PWA) that replaces t
   (`LINKEDIN_COMPANIES_JOBS_URL` in `web/js/config.js`). Find a role there, then look up who works at that
   company here and ask them for a referral. Admins get a "copy company list" button to keep the filter current.
 - **Admin**: approve join requests, remove members, see stale profiles with a one-tap WhatsApp reminder, export CSV.
-- Hebrew (RTL) by default with an English switch, dark mode, works offline after the first visit, installs to the home screen.
+- Hebrew (RTL) by default with an English switch; follows the phone's light/dark mode with a System / Light / Dark switch;
+  works offline after the first visit; installs to the home screen; side rail + two-pane layout on desktop.
+- Design system "Deep Water" (from the 7Tech logo): see [docs/design-system.md](docs/design-system.md).
 
 **Cost: $0.** GitHub Pages hosts the app; Supabase's free tier holds the data and sends login codes.
 
@@ -49,6 +51,7 @@ Phone / laptop ──► GitHub Pages (static files in web/) ──► Supabase 
 2. **Authentication → Emails → Templates → Magic Link**: make sure the body shows the code too, e.g.
    `<h2>קוד הכניסה שלך: {{ .Token }}</h2><p>או <a href="{{ .ConfirmationURL }}">לחצו כאן להתחבר</a></p>`.
    The code matters on iPhone: an app installed on the home screen can't receive a magic link, so people type the code instead.
+   Keep **Email OTP Length** at its default of **6** (Authentication → Providers → Email); the login screen shows six boxes.
 3. **Authentication → URL Configuration**: set *Site URL* and add a *Redirect URL* for your Pages address
    (e.g. `https://<github-user>.github.io/7Tech/`).
 4. **Important: custom SMTP.** Supabase's built-in email sender only allows a few emails per hour and is meant
@@ -112,14 +115,20 @@ Myself, Seeking for, Email Address, Phone, Linkedin, Preferred Communication Met
 
 ## Development
 
+Design system ("Deep Water"): [docs/design-system.md](docs/design-system.md), tokens in `web/css/tokens.css`,
+components in `web/css/components.css`.
+
+
 ```bash
 npm install                       # only for the Playwright test dependency
 npm run serve                     # http://localhost:8000 (demo mode while config.js is empty)
+npm run serve:docs                # living style guide: http://localhost:8001/docs/styleguide.html
 npm test                          # all checks below
 node scripts/check_i18n.mjs       # Hebrew/English strings complete
+node scripts/check_contrast.mjs   # every color pair in web/css/tokens.css meets WCAG AA, light + dark
 node scripts/check_normalizers.mjs # app and importer clean phones/courses identically
 scripts/test_db.sh                # access rules + sheet import, on a throwaway local Postgres
-node scripts/smoke_test.cjs [dir] # drives every screen in a phone-sized browser (optional screenshots)
+node scripts/smoke_test.cjs [dir] # every flow (phone light+dark, desktop) + axe accessibility scan; optional screenshots
 ```
 
 Lists of fields, seniority levels and "how I can help" options are in `web/js/constants.js`. Keep them in

@@ -23,6 +23,8 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - name: Translations complete
         run: node scripts/check_i18n.mjs
+      - name: Color contrast meets WCAG AA (both themes)
+        run: node scripts/check_contrast.mjs
       - name: App and importer clean data the same way
         run: node scripts/check_normalizers.mjs
       - name: Database access rules and sheet import
