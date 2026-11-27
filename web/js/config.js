@@ -1,8 +1,9 @@
 // Fill these in from Supabase → Project Settings → API.
 // The anon key is meant to be public: the database access rules (supabase/schema.sql) protect the data.
 // Leave SUPABASE_URL empty to run the app in DEMO mode with fake, in-memory data.
-export const SUPABASE_URL = '';
-export const SUPABASE_ANON_KEY = '';
+export const SUPABASE_URL = 'https://buhfdrwuhxthmerqihlw.supabase.co';
+// Publishable key (sb_publishable_…) — the replacement for the legacy anon key; also safe to be public.
+export const SUPABASE_ANON_KEY = 'sb_publishable_teXWDS6dFfARwjoeCEpT0A_5lU-PPi0';
 
 export const GROUP_NAME = '7Tech';
 

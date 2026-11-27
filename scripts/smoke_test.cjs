@@ -38,6 +38,17 @@ async function scanAccessibility(page, screen, findings) {
   }
 }
 
+// The real config.js points at the live Supabase project; tests always run against the in-memory demo.
+const DEMO_CONFIG = `export const SUPABASE_URL = '';
+export const SUPABASE_ANON_KEY = '';
+export const GROUP_NAME = '7Tech';
+export const LINKEDIN_COMPANIES_JOBS_URL = 'https://t.ly/us1NH';
+`;
+
+async function useDemoConfig(target) {
+  await target.route('**/js/config.js', (route) => route.fulfill({ contentType: 'text/javascript', body: DEMO_CONFIG }));
+}
+
 function watchErrors(page, errors) {
   page.on('pageerror', (error) => errors.push(`pageerror: ${error.message}`));
   page.on('console', (message) => { if (message.type() === 'error') errors.push(`console: ${message.text()}`); });
@@ -51,6 +62,7 @@ async function login(page, email, code = '123456') {
 
 async function phoneFlows(browser, findings, scheme) {
   const context = await browser.newContext({ ...devices['iPhone 13'], colorScheme: scheme });
+  await useDemoConfig(context);
   const page = await context.newPage();
   const errors = [];
   watchErrors(page, errors);
@@ -232,6 +244,7 @@ async function phoneFlows(browser, findings, scheme) {
 
 async function desktopFlow(browser) {
   const page = await browser.newPage({ viewport: { width: 1280, height: 800 } });
+  await useDemoConfig(page);
   const errors = [];
   watchErrors(page, errors);
   await page.goto(BASE);
